@@ -19,6 +19,13 @@ spring:
       idle-timeout: 10000
       max-lifetime: 1000
       auto-commit: true
+  ai:
+    ollama:
+      chat:
+        model: llama2
+        options:
+          temperature: 0.1
+          top_p: 0.95
   jpa:
     hibernate:
       ddl-auto: validate
