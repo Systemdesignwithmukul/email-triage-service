@@ -19,6 +19,15 @@ spring:
       idle-timeout: 10000
       max-lifetime: 1000
       auto-commit: true
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: gemma:2b
+          temperature: 0.1  # Lower temperature for more consistent JSON output
+          top-k: 40
+          top-p: 0.9
   jpa:
     hibernate:
       ddl-auto: validate

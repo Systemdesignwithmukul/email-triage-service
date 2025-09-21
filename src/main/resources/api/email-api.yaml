@@ -1,0 +1,82 @@
+openapi: 3.0.3
+info:
+  title: email triage Service API
+  description: API for managing email classification
+  version: 1.0.0
+  contact:
+    name: Operational Team
+    email: support@operation.com
+
+servers:
+  - url: http://localhost:8080
+    description: Development server
+
+paths:
+  /ingest/email:
+    post:
+      summary: email for classification
+      description: customer email classification for operation team
+      operationId: ingest
+      tags:
+        - email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Email'
+      responses:
+        '200':
+          description: Transaction created successfully
+        '400':
+          description: Bad request - Invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    Email:
+      type: object
+      required:
+        - subject
+        - from
+        - body
+      properties:
+        subject:
+          type: string
+          description: subject for email
+        from:
+          type: string
+          description: from address of email
+        body:
+          type: string
+          description: body of the email
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        timestamp:
+          type: string
+          format: date-time
+          description: Error timestamp
+          example: "2024-03-15T10:30:00Z"
