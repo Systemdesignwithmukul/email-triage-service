@@ -21,11 +21,13 @@ spring:
       auto-commit: true
   ai:
     ollama:
+      base-url: http://localhost:11434
       chat:
-        model: llama2
         options:
-          temperature: 0.1
-          top_p: 0.95
+          model: gemma:2b
+          temperature: 0.1  # Lower temperature for more consistent JSON output
+          top-k: 40
+          top-p: 0.9
   jpa:
     hibernate:
       ddl-auto: validate
